@@ -1,0 +1,11 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystem.Views.Admin.Category.AddEditCategoryPage"
+             xmlns:viewModels="clr-namespace:OrderingSystem.ViewModels">
+    <StackLayout Margin="20">
+        <Label Text="{Binding TitleCategory}" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
+        <Label Margin="0,20,0,10">Tên danh mục</Label>
+        <Entry x:Name="categoryNameEntry" Placeholder="Nhập tên danh mục" Text="{Binding CategoryName}" />
+        <Button Text="Lưu" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" Margin="0,20,0,0" />
+    </StackLayout>
+</ContentPage>

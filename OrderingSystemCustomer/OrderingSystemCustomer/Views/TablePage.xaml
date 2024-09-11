@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystemCustomer.Views.TablePage"
+             xmlns:viewModels="clr-namespace:OrderingSystemCustomer.ViewModels"
+             xmlns:converters="clr-namespace:OrderingSystemCustomer.Converters">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModels:TableViewModel x:Key="TableViewModel" />
+            <converters:TableStatusToColorConverter x:Key="TableStatusToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <x:StaticResource Key="TableViewModel" />
+    </ContentPage.BindingContext>
+    <Grid Padding="20"  BindingContext="{StaticResource TableViewModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Column="0" Spacing="30">
+            <ScrollView VerticalOptions="FillAndExpand">
+                <CollectionView ItemsSource="{Binding Tables}"
+                        SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <!-- Định dạng hiển thị danh sách các sản phẩm theo kiểu lưới với 2 cột -->
+                        <GridItemsLayout Orientation="Vertical" Span="6" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Button Text="{Binding TableID}"
+                        FontSize="Title"
+                        FontAttributes="Bold"
+                        Padding="40"
+                        Margin="10"
+                        BackgroundColor="{Binding ., Converter={StaticResource TableStatusToColorConverter}}"
+                        Command="{Binding Source={StaticResource TableViewModel}, Path=SelectTableCommand}"
+                        CommandParameter="{Binding .}">
+                            </Button>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" Spacing="40" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <BoxView Color="Green" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                    <Label Text="Trống" FontSize="Large"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <BoxView Color="Red" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                    <Label Text="Đã chọn" FontSize="Large"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <BoxView Color="Orange" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                    <Label Text="Đang chọn" FontSize="Large"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Column="1" Margin="30, 0, 30, 0" Spacing="40">
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label Text="Nhân viên: "
+               FontSize="Title"
+               FontAttributes="Bold"/>
+                <Label Text="{Binding Employee.EmployeeName}"
+              FontSize="Title"
+              FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label Text="Bàn hiện tại: "
+                    FontSize="Title"
+                    FontAttributes="Bold"/>
+                <Label Text="{Binding CurrentTableID}"
+                   FontSize="Title"
+                   FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label Text="Mã hóa đơn: "
+                 FontSize="Title"
+                  FontAttributes="Bold"/>
+                <Label Text="{Binding OrderID}"
+                 FontSize="Title"
+                  FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout Spacing="20">
+                <Button Text="Lập hóa đơn"
+                    
+                FontSize="Large"
+      Command="{Binding CreateInvoiceCommand}"/>
+                <Button Text="Đến trang chủ"
+                        FontSize="Large"
+      Command="{Binding GoToMainPageCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

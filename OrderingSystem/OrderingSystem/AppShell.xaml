@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="OrderingSystem.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:OrderingSystem"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.BackgroundColor="Blue"
+    Title="OrderingSystem">
+    <!-- Flyout Header -->
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout Padding="10">
+            <Image Source="dotnet_bot.png" WidthRequest="100"></Image>
+            <Label Text="Ordering System" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+    <!-- Flyout Footer -->
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout Padding="10">
+            <Image Source="dotnet_bot.png" WidthRequest="100"></Image>
+            <Label Text="Ordering System" HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+    <!-- Style Item -->
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions=".30*, 70*" RowDefinitions="*,*,*" RowSpacing="10" ColumnSpacing="10">
+                <HorizontalStackLayout Grid.Row="0" Spacing="10">
+                    <Image Source="{Binding FlyoutIcon}" WidthRequest="50" HeightRequest="50"></Image>
+                    <Label Text="{Binding Title}"></Label>
+                </HorizontalStackLayout>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <TabBar>
+        <Tab Title="Hệ thống" Icon="dotnet_bot.png">
+            <ShellContent
+                Title="Danh mục"
+                ContentTemplate="{DataTemplate local:Views.Admin.Category.CategoryPage}"
+                Route="CategoryPage" 
+                Icon="dotnet_bot.png"/>
+            <ShellContent
+               Title="Món ăn"
+               ContentTemplate="{DataTemplate local:Views.Admin.Product.ProductPage}"
+               Route="ProductPage" 
+               Icon="dotnet_bot.png"/>
+            <ShellContent
+                 Title="Nhân viên"
+                 ContentTemplate="{DataTemplate local:Views.Admin.Employee.EmployeePage}"
+                 Route="Employee" 
+                 Icon="dotnet_bot.png"/>
+            <ShellContent
+                 Title="Bàn ăn"
+                 ContentTemplate="{DataTemplate local:Views.Admin.Table.TablePage}"
+                 Route="TablePage" 
+                 Icon="dotnet_bot.png"/>
+        </Tab>
+        <Tab Title="Đơn hàng" Icon="dotnet_bot.png">
+            <ShellContent
+                 Title="Đặt bàn"
+                 ContentTemplate="{DataTemplate local:Views.Admin.Order.OrderPage}"
+                 Route="OrderPage" 
+                 Icon="dotnet_bot.png"/>
+    
+        </Tab>
+     
+        <Tab Title="Thống kê" Icon="dotnet_bot.png">
+            <ShellContent
+                 Title="Thống kê tổng hợp"
+                 ContentTemplate="{DataTemplate local:MainPage}"
+                 Route="MainPage" 
+                 Icon="dotnet_bot.png"/>
+  
+        </Tab>
+ 
+    </TabBar>
+</Shell>

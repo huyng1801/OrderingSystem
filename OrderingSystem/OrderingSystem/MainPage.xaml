@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystem.MainPage"
+             xmlns:viewModels="clr-namespace:OrderingSystem.ViewModels">
+
+
+    <ScrollView>
+        <StackLayout>
+            <!-- Display Revenue for Day -->
+            <StackLayout Margin="0, 10, 0, 10" Padding="10" BackgroundColor="#000" Spacing="10" Orientation="Horizontal">
+                <Label Text="Doanh thu theo ngày:" />
+                <Label Text="{Binding DayRevenue}" />
+            </StackLayout>
+
+            <!-- Display Revenue for Month -->
+            <StackLayout Margin="0, 10, 0, 10" Padding="10" BackgroundColor="#000" Spacing="10" Orientation="Horizontal">
+                <Label Text="Doanh thu theo tháng:" />
+                <Label Text="{Binding MonthRevenue}" />
+            </StackLayout>
+
+            <StackLayout Margin="10">
+                <Label Text="Danh sách món ăn bán chạy nhất" FontSize="Title" FontAttributes="Bold" Margin="10" HorizontalTextAlignment="Center"/>
+          
+                <Grid Margin="0, 20, 0, 20">
+                    <Grid.ColumnDefinitions>
+                
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                  
+                    </Grid.ColumnDefinitions>
+                
+                    <Label Grid.Column="0" HorizontalTextAlignment="Start" FontAttributes="Bold">Tên sản phẩm</Label>
+                    <Label Grid.Column="1" HorizontalTextAlignment="End" FontAttributes="Bold">Đơn giá</Label>
+                    <Label Grid.Column="2" HorizontalTextAlignment="Start" FontAttributes="Bold" Margin="20,0,0,0">Danh mục</Label>
+  
+                </Grid>
+                <!-- Product List -->
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <CollectionView x:Name="productListView" ItemsSource="{Binding BestSellingProducts}" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    
+                                    </Grid.ColumnDefinitions>
+                                    <!-- Product Name -->
+                            
+                                    <Label Grid.Column="0" Text="{Binding ProductName}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                    <Label Grid.Column="1" Text="{Binding Price, StringFormat='{0:#,0.##}'}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                    <Label Grid.Column="2" Text="{Binding CategoryName}" VerticalOptions="Center" HorizontalOptions="Start" Margin="20,0,0,0"/>
+                                  
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,6 @@
+@OrderingSystemAPI_HostAddress = http://192.168.1.4:5128
+
+GET {{OrderingSystemAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

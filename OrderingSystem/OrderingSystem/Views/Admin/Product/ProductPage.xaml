@@ -1,0 +1,71 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:OrderingSystem.Views.Admin.Category"
+             xmlns:viewModels="clr-namespace:OrderingSystem.ViewModels"
+             x:Class="OrderingSystem.Views.Admin.Product.ProductPage">
+
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Danh sách món ăn" FontSize="Title" FontAttributes="Bold" Margin="10" HorizontalTextAlignment="Center"/>
+            <Button Text="Thêm mới" Command="{Binding AddCommand}" HorizontalOptions="Start" VerticalOptions="Start"/>
+            <Grid Margin="0, 20, 0, 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" HorizontalTextAlignment="Center" FontAttributes="Bold">Ảnh</Label>
+                <Label Grid.Column="1" HorizontalTextAlignment="Start" FontAttributes="Bold">Tên sản phẩm</Label>
+                <Label Grid.Column="2" HorizontalTextAlignment="End" FontAttributes="Bold">Đơn giá</Label>
+                <Label Grid.Column="3" HorizontalTextAlignment="Start" FontAttributes="Bold" Margin="20,0,0,0">Danh mục</Label>
+                <Label Grid.Column="4" HorizontalTextAlignment="Center" FontAttributes="Bold">Thao tác</Label>
+            </Grid>
+            <!-- Product List -->
+            <ScrollView VerticalOptions="FillAndExpand">
+                <CollectionView x:Name="productListView" ItemsSource="{Binding Products}" SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                </Grid.ColumnDefinitions>
+                                <!-- Product Name -->
+                                <Image
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     Aspect="AspectFill" 
+                                    Grid.Column="0">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Image}" CacheValidity="1" CachingEnabled="true"/>
+                                    </Image.Source>
+                                </Image>
+                                <Label Grid.Column="1" Text="{Binding ProductName}" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding Price, StringFormat='{0:#,0.##}'}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                <Label Grid.Column="3" Text="{Binding CategoryName}" VerticalOptions="Center" HorizontalOptions="Start" Margin="20,0,0,0"/>
+                                <ImageButton Grid.Column="4" Source="icons8_edit_64.png" WidthRequest="30" Command="{Binding BindingContext.EditCommand, Source={x:Reference Name=productListView}}" CommandParameter="{Binding .}" />
+                                <ImageButton Grid.Column="5" Source="icons8_delete_64.png" WidthRequest="30" Command="{Binding BindingContext.DeleteCommand, Source={x:Reference Name=productListView}}" CommandParameter="{Binding .}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" Margin="10" HorizontalOptions="Center" Spacing="10">
+                <Button Text="Bắt đầu" Command="{Binding FirstPageCommand}" HorizontalOptions="Start" VerticalOptions="Start" IsVisible="{Binding IsFirstPage, Mode=OneWay}" />
+                <Button Text="Trước" Command="{Binding PreviousPageCommand}" HorizontalOptions="Start" VerticalOptions="Start" IsVisible="{Binding PreviousPageCommand.CanExecute}" />
+                <Label Text="{Binding CurrentPageText}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Button Text="Tiếp" Command="{Binding NextPageCommand}" HorizontalOptions="End" VerticalOptions="Start" IsVisible="{Binding NextPageCommand.CanExecute}" />
+                <Button Text="Kết thúc" Command="{Binding LastPageCommand}" HorizontalOptions="End" VerticalOptions="Start" IsVisible="{Binding IsLastPage, Mode=OneWay}" />
+            </StackLayout>
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

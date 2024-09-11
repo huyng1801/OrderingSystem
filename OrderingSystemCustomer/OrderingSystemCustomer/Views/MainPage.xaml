@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystemCustomer.Views.MainPage"
+             xmlns:viewModels="clr-namespace:OrderingSystemCustomer.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout Padding="150,150,150,0" Spacing="20">
+        <Label Text="ĐĂNG NHẬP" 
+               FontSize="Title"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"/>
+        <Label Text="Mã nhân viên"
+               FontSize="Medium"/>
+        <Entry Placeholder="Nhập mã nhân viên" Text="{Binding EmployeeID}"
+               FontSize="Medium"/>
+        <Label Text="Mật khẩu"
+               FontSize="Medium"/>
+        <Entry Placeholder="Nhập tên nhân viên" IsPassword="True" Text="{Binding Password}" 
+               FontSize="Medium"/>
+        <Button Text="Đăng nhập" Command="{Binding LoginCommand}"                
+                FontSize="Medium"/>
+    </StackLayout>
+</ContentPage>

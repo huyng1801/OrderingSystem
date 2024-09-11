@@ -1,0 +1,42 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystem.Views.Admin.Product.AddEditProductPage"
+             xmlns:viewModels="clr-namespace:OrderingSystem.ViewModels">
+
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout Margin="20" Spacing="10">
+                <Label Text="{Binding TitleProduct}" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label>Tên sản phẩm</Label>
+                <Entry Placeholder="Nhập tên sản phẩm" Text="{Binding ProductName}" />
+                <Label>Mô tả</Label>
+                <Entry Placeholder="Nhập mô tả" Text="{Binding Description}" />
+                <Label>Giá</Label>
+                <Entry Placeholder="Nhập giá" Keyboard="Numeric" Text="{Binding Price}" />
+
+                <Label>Danh mục</Label>
+                <Picker Title="Chọn danh mục" ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding CategoryName}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+
+                </Picker>
+                <Label>Hình ảnh</Label>
+                <Image Source="{Binding Image}" HeightRequest="200" WidthRequest="200" Aspect="AspectFit">
+                    <Image.HeightRequest>
+                        <OnIdiom x:TypeArguments="x:Double">
+                            <OnIdiom.Phone>100</OnIdiom.Phone>
+                            <OnIdiom.Tablet>200</OnIdiom.Tablet>
+                        </OnIdiom>
+                    </Image.HeightRequest>
+                    <Image.WidthRequest>
+                        <OnIdiom x:TypeArguments="x:Double">
+                            <OnIdiom.Phone>100</OnIdiom.Phone>
+                            <OnIdiom.Tablet>200</OnIdiom.Tablet>
+                        </OnIdiom>
+                    </Image.WidthRequest>
+                </Image>
+                <Button Text="Chọn ảnh" Command="{Binding SelectImageCommand}" BackgroundColor="Blue"/>
+                <Button Text="Lưu" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

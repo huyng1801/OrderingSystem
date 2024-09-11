@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystem.Views.Admin.Order.OrderPage"
+             xmlns:viewModels="clr-namespace:OrderingSystem.ViewModels"
+               xmlns:converters="clr-namespace:OrderingSystem.Converters"
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="OrderPage">
+    <ContentPage.Resources>
+        <converters:StatusToBooleanConverter x:Key="StatusToBooleanConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Danh sách đặt món" FontSize="Title" FontAttributes="Bold" Margin="10" HorizontalTextAlignment="Center"/>
+  
+            <Grid Margin="0,20,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1.5*" />
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" HorizontalTextAlignment="Start" FontAttributes="Bold">Mã hóa đơn</Label>
+                <Label Grid.Column="1" HorizontalTextAlignment="Start" FontAttributes="Bold">Bàn</Label>
+
+                <Label Grid.Column="2" HorizontalTextAlignment="Center" FontAttributes="Bold">Ngày lập</Label>
+                <Label Grid.Column="3" HorizontalTextAlignment="Center" FontAttributes="Bold">Trạng thái</Label>
+                <Label Grid.Column="4" HorizontalTextAlignment="Center" FontAttributes="Bold">Chi tiết</Label>
+            </Grid>
+
+            <ScrollView VerticalOptions="FillAndExpand">
+                <CollectionView x:Name="orderListView" ItemsSource="{Binding Orders}" SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="0.5*" />
+                                   
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding OrderID}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="1" Text="{Binding TableID}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="{Binding OrderDate}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="3" Text="{Binding Status}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <ImageButton Grid.Column="4" Source="icons8_edit_64.png" WidthRequest="30" Command="{Binding BindingContext.ViewOrderDetailsCommand, Source={x:Reference Name=orderListView}}" CommandParameter="{Binding .}" />
+                                <ImageButton Grid.Column="5" Source="icons8_edit_64.png" WidthRequest="30" Command="{Binding BindingContext.ChangeStatusCommand, Source={x:Reference Name=orderListView}}" CommandParameter="{Binding .}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

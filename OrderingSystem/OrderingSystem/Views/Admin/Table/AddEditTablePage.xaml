@@ -1,0 +1,13 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrderingSystem.Views.Admin.Table.AddEditTablePage"
+             xmlns:viewModels="clr-namespace:OrderingSystem.ViewModels">
+    <StackLayout Margin="20">
+        <Label Text="{Binding Title}" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20,0,10" />
+        <Label Margin="0,20,0,10">Mã bàn ăn</Label>
+        <Entry x:Name="tableIdEntry" Placeholder="Enter Table ID" Text="{Binding Table.TableID}" IsEnabled="{Binding IsNew}" />
+        <Label Margin="0,20,0,10">Đang sử dụng</Label>
+        <Switch x:Name="isOccupiedSwitch" IsToggled="{Binding Table.IsOccupied}" IsEnabled="{Binding IsEditing}" />
+        <Button Text="Lưu" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" Margin="0,20,0,0" />
+    </StackLayout>
+</ContentPage>
